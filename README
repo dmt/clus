@@ -1,0 +1,18 @@
+# clus
+
+This is supposed to become a url shortener
+
+currently it is just a playground for me stumbling hopelessly through
+clojure, noir and midje
+
+
+## Usage
+
+lein run
+lein mide --lazytest
+
+## License
+
+Copyright (C) 2012 Daniel Temme
+
+Distributed under the Eclipse Public License, the same as Clojure.
