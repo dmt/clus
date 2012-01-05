@@ -4,4 +4,5 @@
   (:use clojure.test)
   (:use midje.sweet))
 
-(fact (core/render "/") => (contains "clus"))
+
+(fact "whatever" (core/render "/" {:targetUrl "dddd"}) => (contains "dddd"))

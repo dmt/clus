@@ -1,14 +1,20 @@
 (ns clus.views.index
   (:require [clus.views.common :as common])
   (:use [noir.core :only [defpage]]
-        [hiccup.core :only [html]]))
+        [hiccup.core :only [html]]
+        [hiccup.form-helpers]))
 
-(defpage [:get "/aaa/bbb"] []
-         (common/layout
-          [:p "Welcome to bla bla " ]
-          [:p [:div "huhu"]]))
+(defonce ids->values (atom {}))
+(defonce counter (atom 0))
 
-(defpage "/" []
+(defpage "/" {:as params}
          (common/layout
-           [:p "Welcome to clus"]))
+          [:p "Welcome"]
+          (form-to [:post "/create"]
+                   (common/form-fields params))))
+
+(defpage [:post "/create" ] {:as params}
+  (swap! ids->values assoc (swap! counter + 1) (:targetUrl params))
+  (common/layout [:p (str "created " @counter " for " (:targetUrl params))])
+  )
 
