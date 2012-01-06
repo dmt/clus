@@ -6,13 +6,16 @@
 (defonce counter (atom 0))
 
 (defn url->id [url]
-  (key (first (filter #(= url (val %)) @id->url)))
+  (if-let [entry (first (filter #(= url (val %)) @id->url))] (key entry))
   )
 
 (defn id-for [url]
-  (url->id url))
+  (if-let [id (url->id url)]
+    id
+    (str (swap! counter + 1))))
 
 (defn add-url [id url]
+  (swap! id->url assoc id url)
   id)
 
 
